@@ -14,8 +14,9 @@ export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
 ## Build Docker image using as parameters your own GCP project info:
 Update the below command with your own GCP Project ID as well as Cloud Spanner instance/database names.
 ```
-$ docker build -t asia.gcr.io/${PROJECT_ID}/player-api:v1 .
-$ docker build -t asia.gcr.io/${PROJECT_ID}/inventory-api:v1 .
+docker build -t asia.gcr.io/${PROJECT_ID}/player-api:v1 . -f playerapi.Dockerfile
+
+docker build -t asia.gcr.io/${PROJECT_ID}/inventory-api:v1 . -f inventoryapi.Dockerfile
 ```
 
 ## Then push the new Docker image to GCR (Google Container Repository):
@@ -37,10 +38,10 @@ Replace `PROJECT_ID`, `INSTANCE`, `DATABASE` with your own GCP Project ID as wel
 - deployments/k8s/inventoryapi-deployment.yaml
 
 ```
-$ kubectl create -f playerapi-deployment.yaml
-$ kubectl create -f inventoryapi-deployment.yaml
-$ kubectl create -f playerapi-service.yaml
-$ kubectl create -f inventoryapi-service.yaml
+kubectl create -f deployments/k8s/playerapi-deployment.yaml
+kubectl create -f deployments/k8s/inventoryapi-deployment.yaml
+kubectl create -f deployments/k8s/playerapi-service.yaml
+kubectl create -f deployments/k8s/inventoryapi-service.yaml
 ```
 
 ## Check that the Deployments and Services are created
@@ -51,7 +52,8 @@ kubectl get svc
 
 ## Test your gRPC API using the client app located in cmd/player-client-grpc folder
 ```
-$ EXTERNAL-IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+$ cd cmd/client-grpc/
+$ export EXTERNAL_IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 $ go run main.go --grpc-address=${EXTERNAL-IP} --grpc-port=8080
 ```
 
@@ -83,18 +85,18 @@ $ kubectl delete deployment player-deployment
 $ kubectl delete deployment inventory-deployment
 $ kubectl delete svc player-service
 $ kubectl delete svc inventory-service
-$ kubectl create -f playerapi-endpoints-deployment.yaml
-$ kubectl create -f playerapi-endpoints-service.yaml
-$ kubectl create -f inventoryapi-endpoints-deployment.yaml
-$ kubectl create -f inventoryapi-endpoints-service.yaml
+$ kubectl create -f ~/grpc-go-api/deployments/k8s/playerapi-endpoints-deployment.yaml
+$ kubectl create -f ~/grpc-go-api/deployments/k8s/playerapi-endpoints-service.yaml
+$ kubectl create -f ~/grpc-go-api/deployments/k8s/inventoryapi-endpoints-deployment.yaml
+$ kubectl create -f ~/grpc-go-api/deployments/k8s/inventoryapi-endpoints-service.yaml
 ```
 
 If the deployment is successful, you can access the GCP Console and start seeing metrics from the Cloud Endpoints portal.
 
 ## Configuring a quota for the gRPC API
-Redeploy the Cloud Endpoints config predefined for quotas (api_config_quota.yaml)
+Redeploy the Cloud Endpoints config predefined for quotas (api_config_quota.yaml), Replace `PROJECT_ID` with your own GCP Project ID
 ```
-$ cd deployments/endpoints
+$ cd ~/grpc-go-api/deployments/endpoints
 $ gcloud endpoints services deploy player-service/player.pb player-service/api_config_quota.yaml
 ```
 
@@ -104,9 +106,9 @@ Test your gRPC API quota using the created API key
 Replace `API_KEY` in the following command
 
 ```
-$ EXTERNAL-IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+$ EXTERNAL_IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 $ go run main.go \
-    --grpc-address=${EXTERNAL-IP} \
+    --grpc-address=${EXTERNAL_IP} \
     --grpc-port=8080 \
     --api-key=API_KEY
 ```
@@ -124,9 +126,10 @@ Test your gRPC API using a service account
 Replace `PROJECT_ID` and `SERVICE_ACCOUNT` in the following command
 
 ```
-$ EXTERNAL-IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
+$ cd ~/grpc-go-api/cmd/client-grpc/
+$ EXTERNAL_IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 $ go run main.go \
-    --grpc-address=${EXTERNAL-IP} \
+    --grpc-address=${EXTERNAL_IP} \
     --grpc-port=8080 \
     --keyfile=SERVICE_ACCOUNT_KEY.json \
     --audience=player.endpoints.PROJECT_ID.cloud.goog
