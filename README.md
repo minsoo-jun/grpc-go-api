@@ -24,9 +24,12 @@ export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
 
 ## Cloud Spannerのinstance名とdatabaes名を設定:
 Cloud Spannerのinstanceとdatabaseの作成方法についてはこのリンクを参考してください。[link](https://cloud.google.com/spanner/docs/quickstart-console)
+<br/>
+playerapi.Dockerfileとinventoryapi.Dockerfileの"ENV"部分を自分の環境の値を入れてください。
 ```
-export SPANNER_INSTANCE="demo-spanner"
-export SPANNER_DATABASE="demo-grpc"
+ENV PROJECTID="<< GCP Project ID >>"
+ENV INSTANCE="<< Cloud Spanner Instance ID >>"
+ENV DATABASE="<< Cloud Spanner Database Name >>"
 
 ```
 
