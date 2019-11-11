@@ -4,7 +4,7 @@ Sample Gaming Microservice gRPC APIsはgolangで作成されており、GCP (Goo
 
 GCPを初めての方はこのリンクを先に確認してください。[link](https://cloud.google.com/gcp/getting-started/)
 <br/>
-<font color="red">下記のコマンドは[Cloud Shell](https://cloud.google.com/shell/)または[Cloud SDK](https://cloud.google.com/sdk/)をインストールして実行する必要があります。</font>
+下記のコマンドは[Cloud Shell](https://cloud.google.com/shell/)または[Cloud SDK](https://cloud.google.com/sdk/)をインストールして実行する必要があります。
 ## project ID の設定:
 ```
 export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
