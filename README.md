@@ -1,12 +1,11 @@
 # Gaming Microservice Architecture (gRPC/Golang)
-Sample Gaming Microservice gRPC APIs written in golang using Cloud Spanner on GCP (Google Cloud Platform) as storage layer. 
-This sample uses GKE (Google Kubernetes Engine) on GCP to host the gRPC API server and use Cloud Endpoints to secure our API and GCLB (L7 LB - ingress in k8s) to load balance the service.
-
+Sample Gaming Microservice gRPC APIsはgolangで作成されており、GCP (Google Cloud Platform)上でCloud Spannerをストレージレイヤーとして使ってます。このサンプルはGCPのGKE (Google Kubernetes Engine)でgRPC API Serverをホストしてますし、Cloud Endpointsを使ってセキュアにAPIとGCLB (L7 LB - ingress in k8s)でサービスしてます。
 <img src="./gaming-microservice-arch.png">
 
-To get started with GCP, please follow this [link](https://cloud.google.com/gcp/getting-started/).
-
-## Define your project ID:
+GCPを初めての方はこのリンクを先に確認してください。[link](https://cloud.google.com/gcp/getting-started/)
+<br/>
+<font color="Crimson">下記のコマンドは[Cloud Shell](https://cloud.google.com/shell/)または[Cloud SDK](https://cloud.google.com/sdk/)をインストールして実行する必要があります。</font>
+## project ID の設定:
 ```
 export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
 ```
