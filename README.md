@@ -33,24 +33,25 @@ ENV DATABASE="<< Cloud Spanner Database Name >>"
 
 ```
 
-## Build Docker image using as parameters your own GCP project info:
-Update the below command with your own GCP Project ID as well as Cloud Spanner instance/database names.
+## Docker image作成: 
+指定したProject ID, Spanner Instance ID, Spanner Database でDocker Imageをビルド
 ```
 docker build -t asia.gcr.io/${PROJECT_ID}/player-api:v1 . -f playerapi.Dockerfile
 
 docker build -t asia.gcr.io/${PROJECT_ID}/inventory-api:v1 . -f inventoryapi.Dockerfile
 ```
 
-## Then push the new Docker image to GCR (Google Container Repository):
+## 作成したDocker imageを GCR (Google Container Repository)へ登録 
+[gcloud docker とバージョン 18.03 以上の Docker クライアント](https://cloud.google.com/container-registry/docs/support/deprecation-notices#gcloud-docker)
 ```
-$ gcloud docker -- push asia.gcr.io/${PROJECT_ID}/player-api:v1
-$ gcloud docker -- push asia.gcr.io/${PROJECT_ID}/inventory-api:v1
+gcloud docker -- push asia.gcr.io/${PROJECT_ID}/player-api:v1
+gcloud docker -- push asia.gcr.io/${PROJECT_ID}/inventory-api:v1
 ```
 
-## You can verify that the image has been successfully pushed using this commmand:
+## 下記のコマンドでイメージが正しく上がったかの確認ができます: 
 ```
-$ gcloud container images list-tags asia.gcr.io/${PROJECT_ID}/player-api
-$ gcloud container images list-tags asia.gcr.io/${PROJECT_ID}/inventory-api
+gcloud container images list-tags asia.gcr.io/${PROJECT_ID}/player-api
+gcloud container images list-tags asia.gcr.io/${PROJECT_ID}/inventory-api
 ```
 
 ## Deploy the Web app to GKE (first deployment then service)
