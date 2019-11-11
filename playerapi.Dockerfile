@@ -9,9 +9,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
-ENV PROJECTID=""
-ENV INSTANCE=""
-ENV DATABASE=""
+ENV PROJECTID="${PROJECT_ID}"
+ENV INSTANCE="${SPANNER_INSTANCE}"
+ENV DATABASE="${SPANNER_DATABASE}"
 COPY --from=builder /go/src/github.com/ksimir/grpc-go-api/cmd/player-server/player-server . 
 EXPOSE 50051
 ENTRYPOINT [ "sh", "-c", "./player-server -grpc-port=50051 -project=$PROJECTID -instance=$INSTANCE -database=$DATABASE"]

@@ -1,3 +1,7 @@
+# Original Page
+https://github.com/ksimir/grpc-go-api
+<br/>
+このページはksimirさんの許可をもらって日本語化してものです。
 # Gaming Microservice Architecture (gRPC/Golang)
 Sample Gaming Microservice gRPC APIsはgolangで作成されており、GCP (Google Cloud Platform)上でCloud Spannerをストレージレイヤーとして使ってます。このサンプルはGCPのGKE (Google Kubernetes Engine)でgRPC API Serverをホストしてますし、Cloud Endpointsを使ってセキュアにAPIとGCLB (L7 LB - ingress in k8s)でサービスしてます。
 <img src="./gaming-microservice-arch.png">
@@ -5,9 +9,25 @@ Sample Gaming Microservice gRPC APIsはgolangで作成されており、GCP (Goo
 GCPを初めての方はこのリンクを先に確認してください。[link](https://cloud.google.com/gcp/getting-started/)
 <br/>
 下記のコマンドは[Cloud Shell](https://cloud.google.com/shell/)または[Cloud SDK](https://cloud.google.com/sdk/)をインストールして実行する必要があります。
+<br/>
+
+## git clone
+```
+git clone https://github.com/minsoo-jun/grpc-go-api.git
+cd grpc-go-apicd grpc-go-api
+```
+
 ## project ID の設定:
 ```
 export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
+```
+
+## Cloud Spannerのinstance名とdatabaes名を設定:
+Cloud Spannerのinstanceとdatabaseの作成方法についてはこのリンクを参考してください。[link](https://cloud.google.com/spanner/docs/quickstart-console)
+```
+export SPANNER_INSTANCE="demo-spanner"
+export SPANNER_DATABASE="demo-grpc"
+
 ```
 
 ## Build Docker image using as parameters your own GCP project info:
