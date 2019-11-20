@@ -13,13 +13,14 @@ spec:
     spec:       
       containers:
       - name: inventory-api
-        image: asia.gcr.io/PROJECT_ID/inventory-api:v1 # replace PROJECT_ID
+        #image: asia.gcr.io/PROJECT_ID/inventory-api:v1 # replace PROJECT_ID
+        image: asia.gcr.io/minsoojunprj/inventory-api:v1 # replace PROJECT_ID
         ports:
         - containerPort: 50051
         env:
         - name: PROJECTID
-          value: "PROJECT_ID" # replace PROJECT_ID
+          value: "minsoojunprj" # replace PROJECT_ID
         - name: INSTANCE
-          value: "INSTANCE" # replace INSTANCE
+          value: "demo-spanner" # replace INSTANCE
         - name: DATABASE
-          value: "DATABASE"  # replace DATABASE
+          value: "demo-grpc"  # replace DATABASE

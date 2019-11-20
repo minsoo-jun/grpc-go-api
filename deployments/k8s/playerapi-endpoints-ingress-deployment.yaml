@@ -14,23 +14,23 @@ spec:
     spec:       
       containers:
       - name: player-api
-        image: asia.gcr.io/PROJECT_ID/player-api:v1 # replace PROJECT_ID
+        image: asia.gcr.io/minsoojunprj/player-api:v1 # replace PROJECT_ID
         imagePullPolicy: "Always"
         ports:
         - containerPort: 50051
         env:
         - name: PROJECTID
-          value: "PROJECT_ID" # replace PROJECT_ID
+          value: "minsoojunprj" # replace PROJECT_ID
         - name: INSTANCE
-          value: "INSTANCE" # replace INSTANCE
+          value: "demo-spanner" # replace INSTANCE
         - name: DATABASE
-          value: "DATABASE"  # replace DATABASE
+          value: "demo-grpc"  # replace DATABASE
       - name: esp
         image: gcr.io/endpoints-release/endpoints-runtime:1
         args: [
           "-S", "9000",
           "-a", "grpc://127.0.0.1:50051",
-          "-s", "player.endpoints.PROJECT_ID.cloud.goog", # replace PROJECT_ID
+          "-s", "player.endpoints.minsoojunprj.cloud.goog", # replace PROJECT_ID
           "--rollout_strategy", "managed",
           "-z", " ",
         ]
