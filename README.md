@@ -228,6 +228,7 @@ Test your gRPC API quota using the created API key
 Replace `API_KEY` in the following command
 
 ```
+$ cd ~/grpc-go-api/cmd/client-grpc/
 $ EXTERNAL_IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
 $ go run main.go \
     --grpc-address=${EXTERNAL_IP} \
