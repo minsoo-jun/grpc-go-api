@@ -5,7 +5,7 @@ config_version: 3
 
 # Name of the service configuration.
 # Replace PROJECT_ID with the ID of your GCP project:
-name: player.endpoints.PROJECT_ID.cloud.goog
+name: player.endpoints.minsoojunprj.cloud.goog
 
 # API title to appear in the user interface (Google Cloud Console).
 title: Player gRPC API
