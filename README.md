@@ -145,8 +145,8 @@ Step 5 - Clean up the previously deployed deployments and services
 ```
 $ kubectl delete svc player-service
 $ kubectl delete svc inventory-service
-$ kubectl delete deployment playerapi-endpoints-deployment.yaml
-$ kubectl delete deployment inventoryapi-endpoints-deployment.yaml
+$ kubectl delete deployment inventory-deployment
+$ kubectl delete deployment player-deployment
 ```
 
 Step 6 - Finally redeploy the k8s deployments and services (updated to work with the HTTP LB) and deploy the HTTP LB to expose both gRPC APIs.
