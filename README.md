@@ -97,7 +97,7 @@ go get github.com/minsoo-jun/grpc-go-api/pkg/api/v1/player
 ```
 $ cd cmd/client-grpc/
 $ export EXTERNAL_IP=$(kubectl get service player-service --output jsonpath="{.status.loadBalancer.ingress[0].ip}")
-$ go run main.go --grpc-address=${EXTERNAL-IP} --grpc-port=8080
+$ go run main.go --grpc-address=${EXTERNAL_IP} --grpc-port=8080
 ```
 
 <h1> Need to set Using a HTTP LB (ingress) to expose both gRPC services using managed SSL certificate
@@ -155,11 +155,11 @@ Replace `PROJECT_ID`, `INSTANCE`, `DATABASE` with your own GCP Project ID as wel
 - deployments/k8s/playerapi-endpoints-deployment.yaml
 - deployments/k8s/inventoryapi-endpoints-deployment.yaml
 ```
-$ kubectl create -f playerapi-endpoints-ingress-deployment.yaml
-$ kubectl create -f playerapi-endpoints-ingress-service.yaml
-$ kubectl create -f inventoryapi-endpoints-ingress-deployment.yaml
-$ kubectl create -f inventoryapi-endpoints-ingress-service.yaml
-$ kubectl create -f gameapi-ingress.yaml
+$ kubectl create -f deployments/k8s/playerapi-endpoints-ingress-deployment.yaml
+$ kubectl create -f deployments/k8s/playerapi-endpoints-ingress-service.yaml
+$ kubectl create -f deployments/k8s/inventoryapi-endpoints-ingress-deployment.yaml
+$ kubectl create -f deployments/k8s/inventoryapi-endpoints-ingress-service.yaml
+$ kubectl create -f deployments/k8s/gameapi-ingress.yaml
 ```
 
 Step 7 - Test your both gRPC APIs exposed by the HTTP LB (the gRPC path is used to route to the correct backend).
