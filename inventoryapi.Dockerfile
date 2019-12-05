@@ -12,7 +12,7 @@ RUN apk --no-cache add ca-certificates
 ENV PROJECTID="minsoojunprj"
 ENV INSTANCE="demo-spanner"
 ENV DATABASE="demo-grpc"
-#COPY --from=builder /go/src/github.com/ksimir/grpc-go-api/cmd/inventory-server/inventory-server .
-COPY --from=builder /home/minsoojun/grpc-go-api/cmd/inventory-server/inventory-server .
+COPY --from=builder /go/src/github.com/ksimir/grpc-go-api/cmd/inventory-server/inventory-server .
+#COPY --from=builder /home/minsoojun/grpc-go-api/cmd/inventory-server/inventory-server .
 EXPOSE 50051
 ENTRYPOINT [ "sh", "-c", "./inventory-server -grpc-port=50051 -project=$PROJECTID -instance=$INSTANCE -database=$DATABASE"]
