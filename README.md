@@ -55,7 +55,8 @@ gcloud container images list-tags asia.gcr.io/${PROJECT_ID}/inventory-api
 ```
 
 ## Web Appを GKEへDeploy (先deploymentを作成した後にserviceを作成する)
-DeploymentするKubernetesクラスタが必要です。
+DeploymentするKubernetesクラスタが必要です。KubernetesクラスタをUI コンソルから作成します。<br/>
+作成時にノードプール設定→セキュリティのところで”すべてのCloud APIに完全アクセス権を許可”を洗濯
 ```text
 gcloud container clusters create grpc-game --zone asia-northeast1-c
 ```
