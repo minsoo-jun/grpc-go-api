@@ -59,7 +59,7 @@ DeploymentするKubernetesクラスタが必要です。Kubernetesクラスタ�
 作成時にノードプール設定→セキュリティのところで”すべてのCloud APIに完全アクセス権を許可”を洗濯
 <img src="./img/node-pool-setting.png">
 ```text
-gcloud container clusters create grpc-game --zone asia-northeast1-c
+gcloud container clusters create grpc-game --zone asia-northeast1-c --scopes cloud-platform,datastore
 ```
 下記のconifgファイルの`PROJECT_ID`, `INSTANCE`, `DATABASE`を自身のGCP Project IDやCloud SpannerのInstance ID、Database nameで置換してください :
 - deployments/k8s/playerapi-deployment.yaml

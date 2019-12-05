@@ -7,6 +7,9 @@ WORKDIR /go/src/github.com/ksimir/grpc-go-api/cmd/player-server
 RUN go get -d -v
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo .
 
+## Add ref:https://github.com/googleapis/google-cloud-go/issues/928
+RUN apk --no-cache --update add ca-certificates
+
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 ENV PROJECTID="minsoojunprj"
